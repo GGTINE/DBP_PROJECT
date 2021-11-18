@@ -27,13 +27,22 @@ namespace DBP_PROJECT
 
 
         #region Write
-        public void Throw_Query(string Query)
+        public bool WriteQuery(string Query)
         {
-            MySqlConnection conn = new(String_Connection_Infomation);
-            conn.Open();
-            MySqlCommand cmd = new(Query, conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            using (MySqlConnection conn = new(String_Connection_Infomation))
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new(Query, conn);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
 
         public DataTable SELECT(string query)

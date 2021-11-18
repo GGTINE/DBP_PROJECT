@@ -10,11 +10,19 @@ using System.Windows.Forms;
 
 namespace DBP_PROJECT
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
+            Reset();
+        }
+
+        private void Reset()
+        {
+            groupBoxUserLogout.Hide();
+            groupBoxAdmin.Hide();
+            groupBoxUser.Hide();
         }
 
         private void SingleUser(string id)
@@ -39,7 +47,20 @@ namespace DBP_PROJECT
             {
                 SingleUser(User_ID);
                 MessageBox.Show("로그인에 성공하였습니다.");
+                groupBoxLogin.Hide();
+                groupBoxUserLogout.Show();
                 labelUserName.Text = $"{User.GetInstance().Name}님 반갑습니다.";
+                if(User.GetInstance().Name == "관리자")
+                {
+                    groupBoxAdmin.Show();
+                    DataTable dt = DBManager.GetInstance().SELECT(
+                    "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales GROUP BY 판매자");
+                    dataGridInfo.DataSource = dt;
+                }
+                else
+                {
+                    groupBoxUser.Show();
+                }
             }
             else
             {
@@ -50,32 +71,31 @@ namespace DBP_PROJECT
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
             MessageBox.Show("로그아웃 합니다.");
-            this.Close();
+            Reset();
+            groupBoxLogin.Show();
         }
 
-        private void buttonMeal1_Click(object sender, EventArgs e)
+        private void buttonPigkukbap_Click(object sender, EventArgs e)
         {
-            DBManager.GetInstance().Throw_Query($"INSERT INTO `s5469394`.`Sales` (`날짜`, `국밥종류`, `판매자`) " +
-                $"VALUES ('{dateTimePeeker.Value}', '{buttonMeal1.Text}', '{User.GetInstance().ID}');");
+            Sellkukbap();
         }
 
-        private void buttonMeal2_Click(object sender, EventArgs e)
+        private void buttonCowheadkukbap_Click(object sender, EventArgs e)
         {
-            DBManager.GetInstance().Throw_Query($"INSERT INTO `s5469394`.`Sales` (`날짜`, `국밥종류`, `판매자`) " +
-                $"VALUES ('{dateTimePeeker.Value}', '{buttonMeal2.Text}', '{User.GetInstance().ID}');");
+            Sellkukbap();
         }
 
-        private void buttonMeal3_Click(object sender, EventArgs e)
+        private void buttonSundaekukbap_Click(object sender, EventArgs e)
         {
-            DBManager.GetInstance().Throw_Query($"INSERT INTO `s5469394`.`Sales` (`날짜`, `국밥종류`, `판매자`) " +
-                $"VALUES ('{dateTimePeeker.Value}', '{buttonMeal3.Text}', '{User.GetInstance().ID}');");
+            Sellkukbap();
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void Sellkukbap()
         {
-            DataTable dt = DBManager.GetInstance().SELECT(
-                "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales GROUP BY 판매자");
-            dataGridInfo.DataSource = dt;
+            bool check = DBManager.GetInstance().WriteQuery($"INSERT INTO `s5469394`.`Sales` (`날짜`, `국밥종류`, `판매자`) " +
+                $"VALUES ('{dateTimePeeker.Value.ToString("yyyy-MM-dd HH:mm:ss")}', '{buttonFigkukbap.Text}', '{User.GetInstance().ID}');");
+            if (check) MessageBox.Show("판매하였습니다.");
+            else MessageBox.Show("판매하지 못하였습니다.");
         }
     }
 }
