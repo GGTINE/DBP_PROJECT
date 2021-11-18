@@ -19,7 +19,7 @@ namespace DBP_PROJECT
 
         private void SingleUser(string id)
         {
-            var UserInfo = DBManager.GetInstance().select_line($"SELECT * FROM s5469394.User WHERE (id = '{id}');");
+            var UserInfo = DBManager.GetInstance().Get_Select($"SELECT * FROM s5469394.User WHERE (id = '{id}');");
             User.GetInstance().ID = UserInfo["ID"];
             User.GetInstance().Password = UserInfo["PW"];
             User.GetInstance().Name = UserInfo["이름"];

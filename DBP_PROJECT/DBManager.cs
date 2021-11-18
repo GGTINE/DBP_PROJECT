@@ -80,46 +80,14 @@ namespace DBP_PROJECT
         }
         #endregion
 
-        #region Read
-        /*public Dictionary<string, string> dic_copy(Dictionary<string, string> dict)
-        {
-            var dict_copy = new Dictionary<string, string>(dict);
-            return dict_copy;
-        }
-        public Dictionary<int, Dictionary<string, string>> select_row(string sql_query) 
-        {
-            MySqlConnection conn = new(String_Connection_Infomation);
-            conn.Open();
-            MySqlCommand cmd = new(sql_query, conn);
-            MySqlDataReader rdr = cmd.ExecuteReader();
-            var dict = new Dictionary<string, string>();
-            var dict_index = new Dictionary<int, Dictionary<string, string>>();
-            List<string> columns = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList(); // 모든컬럼명 list로 들어옴
-            int len = 0;
-            while (rdr.Read())
-            {
-                ++len;
-                for (int i = 0; i < columns.Count; i++)
-                {
-                    string key = columns[i];
-                    string value = rdr[columns[i]].ToString();
-                    dict.Add(key, value);
-                }
-                dict_index.Add(len, dic_copy(dict));
-                dict.Clear();
-            }
-            conn.Close();
-            return dict_index;
-        }*/
-
-        public Dictionary<string, string> select_line(string sql_query)
+        public Dictionary<string, string> Get_Select(string sql_query)
         {
             MySqlConnection conn = new(String_Connection_Infomation);
             conn.Open();
             MySqlCommand cmd = new MySqlCommand(sql_query, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             var dict = new Dictionary<string, string>();
-            List<string> columns = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList(); // 모든컬럼명 list로 들어옴
+            List<string> columns = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList();
 
             rdr.Read();
 
@@ -129,10 +97,8 @@ namespace DBP_PROJECT
                 string value = rdr[columns[i]].ToString();
                 dict.Add(key, value);
             }
-
             conn.Close();
             return dict;
         }
-        #endregion
     }
 }
