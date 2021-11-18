@@ -74,7 +74,7 @@ namespace DBP_PROJECT
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             DataTable dt = DBManager.GetInstance().SELECT(
-                "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales GROUP BY 국밥종류");
+                "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales GROUP BY 판매자");
             dataGridInfo.DataSource = dt;
         }
     }

@@ -81,7 +81,7 @@ namespace DBP_PROJECT
         #endregion
 
         #region Read
-        public Dictionary<string, string> dic_copy(Dictionary<string, string> dict)
+        /*public Dictionary<string, string> dic_copy(Dictionary<string, string> dict)
         {
             var dict_copy = new Dictionary<string, string>(dict);
             return dict_copy;
@@ -110,7 +110,7 @@ namespace DBP_PROJECT
             }
             conn.Close();
             return dict_index;
-        }
+        }*/
 
         public Dictionary<string, string> select_line(string sql_query)
         {
