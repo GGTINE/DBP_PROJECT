@@ -37,7 +37,7 @@ namespace DBP_PROJECT
             this.labelUserName = new System.Windows.Forms.Label();
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.buttonFigkukbap = new System.Windows.Forms.Button();
+            this.buttonPigkukbap = new System.Windows.Forms.Button();
             this.buttonCowheadkukbap = new System.Windows.Forms.Button();
             this.buttonSundaekukbap = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -123,15 +123,15 @@ namespace DBP_PROJECT
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // buttonFigkukbap
+            // buttonPigkukbap
             // 
-            this.buttonFigkukbap.Location = new System.Drawing.Point(14, 104);
-            this.buttonFigkukbap.Name = "buttonFigkukbap";
-            this.buttonFigkukbap.Size = new System.Drawing.Size(127, 42);
-            this.buttonFigkukbap.TabIndex = 9;
-            this.buttonFigkukbap.Text = "돼지국밥";
-            this.buttonFigkukbap.UseVisualStyleBackColor = true;
-            this.buttonFigkukbap.Click += new System.EventHandler(this.buttonPigkukbap_Click);
+            this.buttonPigkukbap.Location = new System.Drawing.Point(14, 104);
+            this.buttonPigkukbap.Name = "buttonPigkukbap";
+            this.buttonPigkukbap.Size = new System.Drawing.Size(127, 42);
+            this.buttonPigkukbap.TabIndex = 9;
+            this.buttonPigkukbap.Text = "돼지국밥";
+            this.buttonPigkukbap.UseVisualStyleBackColor = true;
+            this.buttonPigkukbap.Click += new System.EventHandler(this.buttonPigkukbap_Click);
             // 
             // buttonCowheadkukbap
             // 
@@ -156,7 +156,7 @@ namespace DBP_PROJECT
             // groupBoxUser
             // 
             this.groupBoxUser.Controls.Add(this.dateTimePeeker);
-            this.groupBoxUser.Controls.Add(this.buttonFigkukbap);
+            this.groupBoxUser.Controls.Add(this.buttonPigkukbap);
             this.groupBoxUser.Controls.Add(this.buttonSundaekukbap);
             this.groupBoxUser.Controls.Add(this.buttonCowheadkukbap);
             this.groupBoxUser.Location = new System.Drawing.Point(37, 82);
@@ -242,7 +242,7 @@ namespace DBP_PROJECT
         private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.Button buttonLogOut;
         private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.Button buttonFigkukbap;
+        private System.Windows.Forms.Button buttonPigkukbap;
         private System.Windows.Forms.Button buttonCowheadkukbap;
         private System.Windows.Forms.Button buttonSundaekukbap;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;

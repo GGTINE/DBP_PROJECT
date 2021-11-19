@@ -54,7 +54,7 @@ namespace DBP_PROJECT
                 {
                     groupBoxAdmin.Show();
                     DataTable dt = DBManager.GetInstance().SELECT(
-                    "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales GROUP BY 판매자");
+                    "Select 판매자, COUNT(국밥종류) AS 판매량 from s5469394.Sales Where (국밥종류 = '돼지국밥') GROUP BY 판매자");
                     dataGridInfo.DataSource = dt;
                 }
                 else
@@ -77,23 +77,23 @@ namespace DBP_PROJECT
 
         private void buttonPigkukbap_Click(object sender, EventArgs e)
         {
-            Sellkukbap();
+            Sellkukbap(buttonPigkukbap.Text);
         }
 
         private void buttonCowheadkukbap_Click(object sender, EventArgs e)
         {
-            Sellkukbap();
+            Sellkukbap(buttonCowheadkukbap.Text);
         }
 
         private void buttonSundaekukbap_Click(object sender, EventArgs e)
         {
-            Sellkukbap();
+            Sellkukbap(buttonSundaekukbap.Text);
         }
 
-        private void Sellkukbap()
+        private void Sellkukbap(string goods)
         {
             bool check = DBManager.GetInstance().WriteQuery($"INSERT INTO `s5469394`.`Sales` (`날짜`, `국밥종류`, `판매자`) " +
-                $"VALUES ('{dateTimePeeker.Value.ToString("yyyy-MM-dd HH:mm:ss")}', '{buttonFigkukbap.Text}', '{User.GetInstance().ID}');");
+                $"VALUES ('{dateTimePeeker.Value.ToString("yyyy-MM-dd HH:mm:ss")}', '{goods}', '{User.GetInstance().ID}');");
             if (check) MessageBox.Show("판매하였습니다.");
             else MessageBox.Show("판매하지 못하였습니다.");
         }
