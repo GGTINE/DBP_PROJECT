@@ -46,6 +46,9 @@ namespace DBP_PROJECT
             this.groupBoxAdmin = new System.Windows.Forms.GroupBox();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.groupBoxUserLogout = new System.Windows.Forms.GroupBox();
+            this.buttonUserDaySell = new System.Windows.Forms.Button();
+            this.buttonKukbapDaySell = new System.Windows.Forms.Button();
+            this.buttonKukbapMonthSell = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInfo)).BeginInit();
             this.groupBoxUser.SuspendLayout();
             this.groupBoxAdmin.SuspendLayout();
@@ -56,10 +59,10 @@ namespace DBP_PROJECT
             // dataGridInfo
             // 
             this.dataGridInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridInfo.Location = new System.Drawing.Point(14, 22);
+            this.dataGridInfo.Location = new System.Drawing.Point(6, 84);
             this.dataGridInfo.Name = "dataGridInfo";
             this.dataGridInfo.RowTemplate.Height = 25;
-            this.dataGridInfo.Size = new System.Drawing.Size(635, 176);
+            this.dataGridInfo.Size = new System.Drawing.Size(658, 176);
             this.dataGridInfo.TabIndex = 12;
             // 
             // textBoxID
@@ -176,10 +179,13 @@ namespace DBP_PROJECT
             // 
             // groupBoxAdmin
             // 
+            this.groupBoxAdmin.Controls.Add(this.buttonKukbapMonthSell);
+            this.groupBoxAdmin.Controls.Add(this.buttonKukbapDaySell);
+            this.groupBoxAdmin.Controls.Add(this.buttonUserDaySell);
             this.groupBoxAdmin.Controls.Add(this.dataGridInfo);
             this.groupBoxAdmin.Location = new System.Drawing.Point(37, 240);
             this.groupBoxAdmin.Name = "groupBoxAdmin";
-            this.groupBoxAdmin.Size = new System.Drawing.Size(670, 209);
+            this.groupBoxAdmin.Size = new System.Drawing.Size(670, 266);
             this.groupBoxAdmin.TabIndex = 14;
             this.groupBoxAdmin.TabStop = false;
             this.groupBoxAdmin.Text = "관리자화면";
@@ -211,11 +217,41 @@ namespace DBP_PROJECT
             this.groupBoxUserLogout.TabIndex = 15;
             this.groupBoxUserLogout.TabStop = false;
             // 
+            // buttonUserDaySell
+            // 
+            this.buttonUserDaySell.Location = new System.Drawing.Point(14, 22);
+            this.buttonUserDaySell.Name = "buttonUserDaySell";
+            this.buttonUserDaySell.Size = new System.Drawing.Size(96, 48);
+            this.buttonUserDaySell.TabIndex = 13;
+            this.buttonUserDaySell.Text = "일간 유저 판매";
+            this.buttonUserDaySell.UseVisualStyleBackColor = true;
+            this.buttonUserDaySell.Click += new System.EventHandler(this.buttonUserDaySell_Click);
+            // 
+            // buttonKukbapDaySell
+            // 
+            this.buttonKukbapDaySell.Location = new System.Drawing.Point(116, 22);
+            this.buttonKukbapDaySell.Name = "buttonKukbapDaySell";
+            this.buttonKukbapDaySell.Size = new System.Drawing.Size(96, 48);
+            this.buttonKukbapDaySell.TabIndex = 14;
+            this.buttonKukbapDaySell.Text = "일간 국밥 판매";
+            this.buttonKukbapDaySell.UseVisualStyleBackColor = true;
+            this.buttonKukbapDaySell.Click += new System.EventHandler(this.buttonKukbapDaySell_Click);
+            // 
+            // buttonKukbapMonthSell
+            // 
+            this.buttonKukbapMonthSell.Location = new System.Drawing.Point(218, 22);
+            this.buttonKukbapMonthSell.Name = "buttonKukbapMonthSell";
+            this.buttonKukbapMonthSell.Size = new System.Drawing.Size(100, 48);
+            this.buttonKukbapMonthSell.TabIndex = 15;
+            this.buttonKukbapMonthSell.Text = "월간 국밥 판매";
+            this.buttonKukbapMonthSell.UseVisualStyleBackColor = true;
+            this.buttonKukbapMonthSell.Click += new System.EventHandler(this.buttonKukbapMonthSell_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 518);
             this.Controls.Add(this.groupBoxUserLogout);
             this.Controls.Add(this.groupBoxLogin);
             this.Controls.Add(this.groupBoxAdmin);
@@ -252,6 +288,9 @@ namespace DBP_PROJECT
         private System.Windows.Forms.DateTimePicker dateTimePeeker;
         private System.Windows.Forms.GroupBox groupBoxLogin;
         private System.Windows.Forms.GroupBox groupBoxUserLogout;
+        private System.Windows.Forms.Button buttonKukbapMonthSell;
+        private System.Windows.Forms.Button buttonKukbapDaySell;
+        private System.Windows.Forms.Button buttonUserDaySell;
     }
 }
 

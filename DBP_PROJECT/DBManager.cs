@@ -17,7 +17,7 @@ namespace DBP_PROJECT
                 instance = new DBManager();
             return instance;
         }
-        private string String_Connection_Infomation =
+        private string Connection_Info =
             "Server = kmu.kro.kr;" +
             "Port = 3306;" +
             "Database = s5469394;" +
@@ -25,45 +25,36 @@ namespace DBP_PROJECT
             "Pwd = s5469394;" +
             "Charset = utf8";
 
-
-        #region Write
         public bool WriteQuery(string Query)
         {
-            using (MySqlConnection conn = new(String_Connection_Infomation))
-            {
-                try
-                {
-                    conn.Open();
-                    MySqlCommand cmd = new(Query, conn);
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-        }
-
-        public DataTable SELECT(string query)
-        {
-            using (MySqlConnection conn = new MySqlConnection(String_Connection_Infomation))
+            using MySqlConnection conn = new(Connection_Info);
+            try
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(rdr);
-                return dt;
+                MySqlCommand cmd = new(Query, conn);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
-        #endregion
+        public DataTable GetGrid(string Query)
+        {
+            using MySqlConnection conn = new(Connection_Info);
+            conn.Open();
+            MySqlCommand cmd = new(Query, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            DataTable dt = new();
+            dt.Load(rdr);
+            return dt;
+        }
 
-        #region Compare
         public bool Compare(params string[] values)
         {
-            MySqlConnection conn = new(String_Connection_Infomation);
+            using MySqlConnection conn = new(Connection_Info);
             conn.Open();
             MySqlCommand cmd = new(values[0], conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
@@ -77,37 +68,29 @@ namespace DBP_PROJECT
                     }
                     if (values.Length == count)
                     {
-                        rdr.Close();
-                        conn.Close();
                         return true;
                     }
                 }
             }
-            rdr.Close();
-            conn.Close();
             return false;
         }
-        #endregion
 
-        public Dictionary<string, string> Get_Select(string sql_query)
+        public Dictionary<string, string> GetSelect(string Query)
         {
-            MySqlConnection conn = new(String_Connection_Infomation);
+            using MySqlConnection conn = new(Connection_Info);
             conn.Open();
-            MySqlCommand cmd = new MySqlCommand(sql_query, conn);
+            MySqlCommand cmd = new(Query, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
-            var dict = new Dictionary<string, string>();
-            List<string> columns = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList();
+            Dictionary<string, string> Dict = new();
+            var ColumnName = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList();
 
             rdr.Read();
 
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < ColumnName.Count; i++)
             {
-                string key = columns[i];
-                string value = rdr[columns[i]].ToString();
-                dict.Add(key, value);
+                Dict.Add(ColumnName[i], rdr[ColumnName[i]].ToString());
             }
-            conn.Close();
-            return dict;
+            return Dict;
         }
     }
 }
