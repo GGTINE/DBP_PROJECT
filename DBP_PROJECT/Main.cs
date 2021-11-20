@@ -20,6 +20,8 @@ namespace DBP_PROJECT
 
         private void Reset()
         {
+            textBoxID.Text = "";
+            textBoxPW.Text = "";
             groupBoxUserLogout.Hide();
             groupBoxAdmin.Hide();
             groupBoxUser.Hide();
@@ -103,22 +105,46 @@ namespace DBP_PROJECT
         private void buttonUserDaySell_Click(object sender, EventArgs e)
         {
             DataTable dt = DBManager.GetInstance().GetGrid(
-                "Select 판매자, COUNT(국밥종류) AS 판매량 " +
-                "from s5469394.Sales " +
-                "Where (국밥종류 = '돼지국밥') " +
-                "GROUP BY 판매자");
+                "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
+                "s.판매자 AS `ID`, " +
+                "COUNT(s.국밥종류) AS `판매량`, " +
+                "SUM(g.가격) AS `판매액` " +
+                "FROM s5469394.Sales s " +
+                "INNER JOIN s5469394.Goods g " +
+                "ON s.국밥종류 = g.국밥종류 " +
+                "GROUP BY 판매일, s.판매자;");
 
             dataGridInfo.DataSource = dt;
         }
 
         private void buttonKukbapDaySell_Click(object sender, EventArgs e)
         {
+            DataTable dt = DBManager.GetInstance().GetGrid(
+                "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
+                "s.국밥종류, " +
+                "COUNT(s.국밥종류) AS `판매량`, " +
+                "SUM(g.가격) AS `판매액` " +
+                "FROM s5469394.Sales s " +
+                "INNER JOIN s5469394.Goods g " +
+                "ON s.국밥종류 = g.국밥종류 " +
+                "GROUP BY 판매일, s.국밥종류;");
 
+            dataGridInfo.DataSource = dt;
         }
 
         private void buttonKukbapMonthSell_Click(object sender, EventArgs e)
         {
+            DataTable dt = DBManager.GetInstance().GetGrid(
+                "SELECT DATE_FORMAT(s.날짜, '%Y-%m') AS `판매일`, " +
+                "s.국밥종류, " +
+                "COUNT(s.국밥종류) AS `판매량`, " +
+                "SUM(g.가격) AS `판매액` " +
+                "FROM s5469394.Sales s " +
+                "INNER JOIN s5469394.Goods g " +
+                "ON s.국밥종류 = g.국밥종류 " +
+                "GROUP BY 판매일, s.국밥종류;");
 
+            dataGridInfo.DataSource = dt;
         }
     }
 }
