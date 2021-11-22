@@ -146,5 +146,11 @@ namespace DBP_PROJECT
 
             dataGridInfo.DataSource = dt;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            test t = new();
+            t.Show();
+        }
     }
 }
