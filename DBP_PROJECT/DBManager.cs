@@ -51,6 +51,20 @@ namespace DBP_PROJECT
             dt.Load(rdr);
             return dt;
         }
+        public List<string> GetList(string Query)
+        {
+            using MySqlConnection conn = new(Connection_Info);
+            conn.Open();
+            MySqlCommand cmd = new(Query, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            List<string> list = new();
+            int i = 0;
+            while(rdr.Read())
+            {
+                list.Add(rdr["국밥종류"].ToString());
+            }
+            return list;
+        }
 
         public bool Compare(params string[] values)
         {

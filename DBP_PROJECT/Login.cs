@@ -53,8 +53,8 @@ namespace DBP_PROJECT
             {
                 SingleUser(User_ID);
                 MessageBox.Show("로그인에 성공하였습니다.");
-                this.Hide();
                 WriteLog();
+                this.Hide();
                 if (User.GetInstance().Name == "관리자")
                 {
                     Admin admin = new();

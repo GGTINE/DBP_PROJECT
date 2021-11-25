@@ -40,10 +40,10 @@ namespace DBP_PROJECT
             this.groupBoxUserLogout = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageUserDaysSell = new System.Windows.Forms.TabPage();
-            this.dataGridInfo = new System.Windows.Forms.DataGridView();
             this.tabPageGoodsDaysSell = new System.Windows.Forms.TabPage();
             this.tabPageGoodsMonthSell = new System.Windows.Forms.TabPage();
             this.tabPageCheckLog = new System.Windows.Forms.TabPage();
+            this.dataGridInfo = new System.Windows.Forms.DataGridView();
             this.groupBoxUserLogout.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInfo)).BeginInit();
@@ -71,13 +71,14 @@ namespace DBP_PROJECT
             // 
             // buttonMenuChange
             // 
-            this.buttonMenuChange.Location = new System.Drawing.Point(74, 33);
+            this.buttonMenuChange.Location = new System.Drawing.Point(912, 125);
             this.buttonMenuChange.Margin = new System.Windows.Forms.Padding(4);
             this.buttonMenuChange.Name = "buttonMenuChange";
             this.buttonMenuChange.Size = new System.Drawing.Size(79, 36);
             this.buttonMenuChange.TabIndex = 18;
             this.buttonMenuChange.Text = "메뉴";
             this.buttonMenuChange.UseVisualStyleBackColor = true;
+            this.buttonMenuChange.Click += new System.EventHandler(this.buttonMenuChange_Click);
             // 
             // buttonUserLog
             // 
@@ -128,7 +129,6 @@ namespace DBP_PROJECT
             this.groupBoxUserLogout.BackColor = System.Drawing.SystemColors.Control;
             this.groupBoxUserLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBoxUserLogout.Controls.Add(this.buttonLogOut);
-            this.groupBoxUserLogout.Controls.Add(this.buttonMenuChange);
             this.groupBoxUserLogout.Controls.Add(this.labelUserName);
             this.groupBoxUserLogout.Location = new System.Drawing.Point(623, 13);
             this.groupBoxUserLogout.Margin = new System.Windows.Forms.Padding(4);
@@ -147,7 +147,7 @@ namespace DBP_PROJECT
             this.tabControl1.Location = new System.Drawing.Point(66, 133);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(942, 31);
+            this.tabControl1.Size = new System.Drawing.Size(426, 31);
             this.tabControl1.TabIndex = 19;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -156,21 +156,10 @@ namespace DBP_PROJECT
             this.tabPageUserDaysSell.Location = new System.Drawing.Point(4, 29);
             this.tabPageUserDaysSell.Name = "tabPageUserDaysSell";
             this.tabPageUserDaysSell.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUserDaysSell.Size = new System.Drawing.Size(934, 0);
+            this.tabPageUserDaysSell.Size = new System.Drawing.Size(418, 0);
             this.tabPageUserDaysSell.TabIndex = 0;
             this.tabPageUserDaysSell.Text = "일간 유저 판매";
             this.tabPageUserDaysSell.UseVisualStyleBackColor = true;
-            // 
-            // dataGridInfo
-            // 
-            this.dataGridInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridInfo.Location = new System.Drawing.Point(70, 169);
-            this.dataGridInfo.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridInfo.Name = "dataGridInfo";
-            this.dataGridInfo.RowHeadersWidth = 51;
-            this.dataGridInfo.RowTemplate.Height = 25;
-            this.dataGridInfo.Size = new System.Drawing.Size(920, 499);
-            this.dataGridInfo.TabIndex = 12;
             // 
             // tabPageGoodsDaysSell
             // 
@@ -200,12 +189,24 @@ namespace DBP_PROJECT
             this.tabPageCheckLog.Text = "로그 확인";
             this.tabPageCheckLog.UseVisualStyleBackColor = true;
             // 
+            // dataGridInfo
+            // 
+            this.dataGridInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridInfo.Location = new System.Drawing.Point(70, 169);
+            this.dataGridInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridInfo.Name = "dataGridInfo";
+            this.dataGridInfo.RowHeadersWidth = 51;
+            this.dataGridInfo.RowTemplate.Height = 25;
+            this.dataGridInfo.Size = new System.Drawing.Size(920, 499);
+            this.dataGridInfo.TabIndex = 12;
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 691);
             this.Controls.Add(this.dataGridInfo);
+            this.Controls.Add(this.buttonMenuChange);
             this.Controls.Add(this.groupBoxUserLogout);
             this.Controls.Add(this.buttonUserLog);
             this.Controls.Add(this.buttonUserDaySell);

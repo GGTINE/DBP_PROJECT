@@ -133,5 +133,11 @@ namespace DBP_PROJECT
                     break;
             }
         }
+
+        private void buttonMenuChange_Click(object sender, EventArgs e)
+        {
+            Menu menu = new();
+            menu.ShowDialog();
+        }
     }
 }
