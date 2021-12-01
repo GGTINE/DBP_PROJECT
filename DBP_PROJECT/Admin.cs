@@ -12,9 +12,11 @@ namespace DBP_PROJECT
 {
     public partial class Admin : Form
     {
+        int CheckLogout = 0;
         public Admin()
         {
             InitializeComponent();
+            labelUserName.Text = User.GetInstance().Name + "님 반갑습니다.";
         }
         private void WriteLog()
         {
@@ -24,61 +26,10 @@ namespace DBP_PROJECT
         }
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
+            CheckLogout = 1;
             WriteLog();
             MessageBox.Show("로그아웃 합니다.");
             this.Close();
-        }
-
-        private void buttonUserDaySell_Click(object sender, EventArgs e)
-        {
-            DataTable dt = DBManager.GetInstance().GetGrid(
-                "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
-                "s.판매자 AS `ID`, " +
-                "COUNT(s.국밥종류) AS `판매량`, " +
-                "SUM(g.가격) AS `판매액` " +
-                "FROM s5469394.Sales s " +
-                "INNER JOIN s5469394.Goods g " +
-                "ON s.국밥종류 = g.국밥종류 " +
-                "GROUP BY 판매일, s.판매자;");
-
-            dataGridInfo.DataSource = dt;
-        }
-
-        private void buttonKukbapDaySell_Click(object sender, EventArgs e)
-        {
-            DataTable dt = DBManager.GetInstance().GetGrid(
-                "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
-                "s.국밥종류, " +
-                "COUNT(s.국밥종류) AS `판매량`, " +
-                "SUM(g.가격) AS `판매액` " +
-                "FROM s5469394.Sales s " +
-                "INNER JOIN s5469394.Goods g " +
-                "ON s.국밥종류 = g.국밥종류 " +
-                "GROUP BY 판매일, s.국밥종류;");
-
-            dataGridInfo.DataSource = dt;
-        }
-
-        private void buttonKukbapMonthSell_Click(object sender, EventArgs e)
-        {
-            DataTable dt = DBManager.GetInstance().GetGrid(
-                "SELECT DATE_FORMAT(s.날짜, '%Y-%m') AS `판매일`, " +
-                "s.국밥종류, " +
-                "COUNT(s.국밥종류) AS `판매량`, " +
-                "SUM(g.가격) AS `판매액` " +
-                "FROM s5469394.Sales s " +
-                "INNER JOIN s5469394.Goods g " +
-                "ON s.국밥종류 = g.국밥종류 " +
-                "GROUP BY 판매일, s.국밥종류;");
-
-            dataGridInfo.DataSource = dt;
-        }
-
-        private void buttonUserLog_Click(object sender, EventArgs e)
-        {
-            DataTable dt = DBManager.GetInstance().GetGrid(
-                "SELECT * FROM s5469394.Log;");
-            dataGridInfo.DataSource = dt;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,6 +89,15 @@ namespace DBP_PROJECT
         {
             Menu menu = new();
             menu.ShowDialog();
+        }
+
+        private void Admin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(CheckLogout == 0)
+            {
+                WriteLog();
+                MessageBox.Show("로그아웃 합니다.");
+            }
         }
     }
 }

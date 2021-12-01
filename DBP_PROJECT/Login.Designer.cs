@@ -46,47 +46,42 @@ namespace DBP_PROJECT
             this.groupBoxLogin.Controls.Add(this.ID);
             this.groupBoxLogin.Controls.Add(this.buttonLogin);
             this.groupBoxLogin.Controls.Add(this.label2);
-            this.groupBoxLogin.Location = new System.Drawing.Point(69, 38);
-            this.groupBoxLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxLogin.Location = new System.Drawing.Point(54, 28);
             this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxLogin.Size = new System.Drawing.Size(277, 332);
+            this.groupBoxLogin.Size = new System.Drawing.Size(215, 249);
             this.groupBoxLogin.TabIndex = 15;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "로그인";
             // 
             // textBoxID
             // 
-            this.textBoxID.Location = new System.Drawing.Point(81, 83);
-            this.textBoxID.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxID.Location = new System.Drawing.Point(63, 62);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(127, 27);
+            this.textBoxID.Size = new System.Drawing.Size(100, 23);
             this.textBoxID.TabIndex = 0;
             // 
             // textBoxPW
             // 
-            this.textBoxPW.Location = new System.Drawing.Point(81, 135);
-            this.textBoxPW.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxPW.Location = new System.Drawing.Point(63, 101);
             this.textBoxPW.Name = "textBoxPW";
-            this.textBoxPW.Size = new System.Drawing.Size(127, 27);
+            this.textBoxPW.PasswordChar = '*';
+            this.textBoxPW.Size = new System.Drawing.Size(100, 23);
             this.textBoxPW.TabIndex = 1;
             // 
             // ID
             // 
             this.ID.AutoSize = true;
-            this.ID.Location = new System.Drawing.Point(49, 86);
-            this.ID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ID.Location = new System.Drawing.Point(38, 64);
             this.ID.Name = "ID";
-            this.ID.Size = new System.Drawing.Size(24, 20);
+            this.ID.Size = new System.Drawing.Size(19, 15);
             this.ID.TabIndex = 2;
             this.ID.Text = "ID";
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(91, 231);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLogin.Location = new System.Drawing.Point(71, 173);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(96, 31);
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
             this.buttonLogin.TabIndex = 8;
             this.buttonLogin.Text = "로그인";
             this.buttonLogin.UseVisualStyleBackColor = true;
@@ -95,20 +90,20 @@ namespace DBP_PROJECT
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 138);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(32, 104);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 20);
+            this.label2.Size = new System.Drawing.Size(25, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "PW";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 404);
+            this.ClientSize = new System.Drawing.Size(347, 303);
             this.Controls.Add(this.groupBoxLogin);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Login";
             this.Text = "Login";
             this.groupBoxLogin.ResumeLayout(false);

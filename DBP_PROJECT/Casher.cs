@@ -12,13 +12,16 @@ namespace DBP_PROJECT
 {
     public partial class Casher : Form
     {
+        int CheckLogout = 0;
         public Casher()
         {
             InitializeComponent();
+            labelUserName.Text = User.GetInstance().Name + "님 반갑습니다.";
         }
 
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
+            CheckLogout = 1;
             WriteLog();
             MessageBox.Show("로그아웃 합니다.");
             this.Close();
@@ -52,6 +55,15 @@ namespace DBP_PROJECT
             DBManager.GetInstance().WriteQuery(
                 "INSERT INTO `s5469394`.`Log` (`id`, `log`, `state`) " +
                 $"VALUES ('{User.GetInstance().ID}', '{DateTime.Now:yyyy-MM-dd-HH-mm-ss}', '로그아웃');");
+        }
+
+        private void Casher_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CheckLogout == 0)
+            {
+                WriteLog();
+                MessageBox.Show("로그아웃 합니다.");
+            }
         }
     }
 }

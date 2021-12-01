@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Security.Cryptography;
 
 namespace DBP_PROJECT
 {
@@ -52,8 +54,8 @@ namespace DBP_PROJECT
             if (try_)
             {
                 SingleUser(User_ID);
-                MessageBox.Show("로그인에 성공하였습니다.");
                 WriteLog();
+                MessageBox.Show("로그인에 성공하였습니다.");
                 this.Hide();
                 if (User.GetInstance().Name == "관리자")
                 {
