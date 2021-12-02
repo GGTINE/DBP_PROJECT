@@ -20,7 +20,7 @@ namespace DBP_PROJECT
         private void StartForm()
         {
             listBoxMenu.Items.Clear();
-            var list = DBManager.GetInstance().GetList("SELECT 국밥종류 From s5469394.Goods");
+            var list = DBManager.GetInstance().GetList("SELECT 상품명 From s5469394.Goods");
             listBoxMenu.Items.Add("선택");
             for(int i = 0; i < list.Count; i++)
             {
@@ -30,8 +30,8 @@ namespace DBP_PROJECT
 
         private void listBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var list = DBManager.GetInstance().GetSelect($"SELECT * From s5469394.Goods WHERE(국밥종류 = '{listBoxMenu.SelectedItem}')");
-            textBoxName.Text = list["국밥종류"].ToString();
+            var list = DBManager.GetInstance().GetSelect($"SELECT * From s5469394.Goods WHERE(상품명 = '{listBoxMenu.SelectedItem}')");
+            textBoxName.Text = list["상품명"].ToString();
             textBoxPrice.Text = list["가격"].ToString();
         }
 
@@ -39,7 +39,7 @@ namespace DBP_PROJECT
         {
 
             bool insert = DBManager.GetInstance().WriteQuery(
-                "INSERT INTO `s5469394`.`Goods` (`국밥종류`, `가격`)" +
+                "INSERT INTO `s5469394`.`Goods` (`상품명`, `가격`)" +
                 $"VALUES('{textBoxName.Text}', '{textBoxPrice.Text}');");
             if(insert)
             {
@@ -56,14 +56,14 @@ namespace DBP_PROJECT
         {
             if(listBoxMenu.SelectedIndex == 0)
             {
-                MessageBox.Show("국밥을 선택해주세요.");
+                MessageBox.Show("상품을 선택해주세요.");
             }
             else
             {
                 bool change = DBManager.GetInstance().WriteQuery(
                     "UPDATE `s5469394`.`Goods`" +
-                    $"SET `국밥종류` = '{textBoxName.Text}', `가격` = '{textBoxPrice.Text}'" +
-                    $"WHERE(`국밥종류` = '{listBoxMenu.SelectedItem}');");
+                    $"SET `상품명` = '{textBoxName.Text}', `가격` = '{textBoxPrice.Text}'" +
+                    $"WHERE(`상품명` = '{listBoxMenu.SelectedItem}');");
                 if(change)
                 {
                     MessageBox.Show("변경되었습니다.");
@@ -80,14 +80,14 @@ namespace DBP_PROJECT
         {
             if (listBoxMenu.SelectedIndex == 0)
             {
-                MessageBox.Show("국밥을 선택해주세요.");
+                MessageBox.Show("상품을 선택해주세요.");
             }
             else
             {
                 DBManager.GetInstance().WriteQuery(
                     "DELETE " +
                     "FROM s5469394.Goods " +
-                    $"WHERE (국밥종류 = '{listBoxMenu.SelectedItem}');");
+                    $"WHERE (상품명 = '{listBoxMenu.SelectedItem}');");
                 MessageBox.Show("삭제되었습니다.");
                 StartForm();
             }

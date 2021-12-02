@@ -41,11 +41,11 @@ namespace DBP_PROJECT
                     dt = DBManager.GetInstance().GetGrid(
                         "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
                         "s.판매자 AS `ID`, " +
-                        "COUNT(s.국밥종류) AS `판매량`, " +
+                        "COUNT(s.상품명) AS `판매량`, " +
                         "SUM(g.가격) AS `판매액` " +
                         "FROM s5469394.Sales s " +
                         "INNER JOIN s5469394.Goods g " +
-                        "ON s.국밥종류 = g.국밥종류 " +
+                        "ON s.상품명 = g.상품명 " +
                         "GROUP BY 판매일, s.판매자;");
                     dataGridInfo.DataSource = dt;
                     break;
@@ -53,13 +53,13 @@ namespace DBP_PROJECT
                 case 1:
                     dt = DBManager.GetInstance().GetGrid(
                         "SELECT DATE_FORMAT(s.날짜, '%Y-%m-%d') AS `판매일`, " +
-                        "s.국밥종류, " +
-                        "COUNT(s.국밥종류) AS `판매량`, " +
+                        "s.상품명, " +
+                        "COUNT(s.상품명) AS `판매량`, " +
                         "SUM(g.가격) AS `판매액` " +
                         "FROM s5469394.Sales s " +
                         "INNER JOIN s5469394.Goods g " +
-                        "ON s.국밥종류 = g.국밥종류 " +
-                        "GROUP BY 판매일, s.국밥종류;");
+                        "ON s.상품명 = g.상품명 " +
+                        "GROUP BY 판매일, s.상품명;");
 
                     dataGridInfo.DataSource = dt;
                     break;
@@ -67,13 +67,13 @@ namespace DBP_PROJECT
                 case 2:
                     dt = DBManager.GetInstance().GetGrid(
                         "SELECT DATE_FORMAT(s.날짜, '%Y-%m') AS `판매일`, " +
-                        "s.국밥종류, " +
-                        "COUNT(s.국밥종류) AS `판매량`, " +
+                        "s.상품명, " +
+                        "COUNT(s.상품명) AS `판매량`, " +
                         "SUM(g.가격) AS `판매액` " +
                         "FROM s5469394.Sales s " +
                         "INNER JOIN s5469394.Goods g " +
-                        "ON s.국밥종류 = g.국밥종류 " +
-                        "GROUP BY 판매일, s.국밥종류;");
+                        "ON s.상품명 = g.상품명 " +
+                        "GROUP BY 판매일, s.상품명;");
 
                     dataGridInfo.DataSource = dt;
                     break;

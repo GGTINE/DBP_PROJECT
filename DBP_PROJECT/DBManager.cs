@@ -61,7 +61,7 @@ namespace DBP_PROJECT
             int i = 0;
             while(rdr.Read())
             {
-                list.Add(rdr["국밥종류"].ToString());
+                list.Add(rdr["상품명"].ToString());
             }
             return list;
         }

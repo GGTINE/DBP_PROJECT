@@ -44,7 +44,7 @@ namespace DBP_PROJECT
             this.listBoxMenu.FormattingEnabled = true;
             this.listBoxMenu.ItemHeight = 15;
             this.listBoxMenu.Location = new System.Drawing.Point(9, 9);
-            this.listBoxMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxMenu.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxMenu.Name = "listBoxMenu";
             this.listBoxMenu.Size = new System.Drawing.Size(135, 319);
             this.listBoxMenu.TabIndex = 0;
@@ -53,7 +53,7 @@ namespace DBP_PROJECT
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(152, 265);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(73, 22);
             this.buttonAdd.TabIndex = 1;
@@ -64,7 +64,7 @@ namespace DBP_PROJECT
             // buttonChange
             // 
             this.buttonChange.Location = new System.Drawing.Point(229, 265);
-            this.buttonChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonChange.Margin = new System.Windows.Forms.Padding(2);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(73, 22);
             this.buttonChange.TabIndex = 2;
@@ -75,7 +75,7 @@ namespace DBP_PROJECT
             // buttonDelete
             // 
             this.buttonDelete.Location = new System.Drawing.Point(148, 9);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(73, 22);
             this.buttonDelete.TabIndex = 3;
@@ -86,7 +86,7 @@ namespace DBP_PROJECT
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(197, 214);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(98, 23);
             this.textBoxName.TabIndex = 4;
@@ -94,7 +94,7 @@ namespace DBP_PROJECT
             // textBoxPrice
             // 
             this.textBoxPrice.Location = new System.Drawing.Point(197, 238);
-            this.textBoxPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPrice.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(98, 23);
             this.textBoxPrice.TabIndex = 5;
@@ -107,7 +107,7 @@ namespace DBP_PROJECT
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 15);
             this.label1.TabIndex = 6;
-            this.label1.Text = "국밥명";
+            this.label1.Text = "상품명";
             // 
             // label2
             // 
@@ -132,7 +132,7 @@ namespace DBP_PROJECT
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.listBoxMenu);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Menu";
             this.Text = "Menu";
             this.ResumeLayout(false);
