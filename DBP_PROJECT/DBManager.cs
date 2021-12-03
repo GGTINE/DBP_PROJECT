@@ -58,7 +58,6 @@ namespace DBP_PROJECT
             MySqlCommand cmd = new(Query, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             List<string> list = new();
-            int i = 0;
             while(rdr.Read())
             {
                 list.Add(rdr["상품명"].ToString());
@@ -105,6 +104,26 @@ namespace DBP_PROJECT
                 Dict.Add(ColumnName[i], rdr[ColumnName[i]].ToString());
             }
             return Dict;
+        }
+
+        public List<Dictionary<string, string>> GetTable(string Query)
+        {
+            List<Dictionary<string, string>> n_list = new();
+            using MySqlConnection conn = new(Connection_Info);
+            conn.Open();
+            MySqlCommand cmd = new(Query, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            var ColumnName = Enumerable.Range(0, rdr.FieldCount).Select(rdr.GetName).ToList();
+            while (rdr.Read())
+            {
+                Dictionary<string, string> Dict = new();
+                for (int i = 0; i < ColumnName.Count; i++)
+                {
+                    Dict.Add(ColumnName[i], rdr[ColumnName[i]].ToString());
+                }
+                n_list.Add(Dict);
+            }
+            return n_list;
         }
     }
 }
