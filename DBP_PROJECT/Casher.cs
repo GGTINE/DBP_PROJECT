@@ -18,6 +18,7 @@ namespace DBP_PROJECT
                     "INSERT INTO `s5469394`.`CurTable` (`날짜`, `상품명`, `판매자`, `테이블번호`) " +
                     $"VALUES ('{dateTimePeeker.Value:yyyy-MM-dd HH:mm:ss}', '{Goods.GetInstance().name}', '{User.GetInstance().ID}', '{textBoxTableNumber.Text}');");
          */
+        int SellCount = 0;
         int CheckLogout = 0;
         public Casher()
         {
@@ -127,8 +128,11 @@ namespace DBP_PROJECT
             for (int i = 0; i < listViewSellList.Items.Count; i++)
             {
                 DBManager.GetInstance().WriteQuery(
-                "INSERT INTO `s5469394`.`Sales` (`날짜`, `상품명`, `상품개수`, `상품가격합`, `테이블번호`, `상태`, 판매자) " +
-                $"VALUES ('{dateTimePeeker.Value:yyyy-MM-dd HH:mm:ss}', '{listViewSellList.Items[i].SubItems[0].Text}', '{listViewSellList.Items[i].SubItems[1].Text}', '{listViewSellList.Items[i].SubItems[2].Text}', '{tabControl1.SelectedIndex}', '주문', '{User.GetInstance().ID}');");
+                    "INSERT INTO `s5469394`.`Sales` (`날짜`, `상품명`, `상품개수`, `상품가격합`, `테이블번호`, `상태`, `판매자`) " +
+                    $"VALUES ('{dateTimePeeker.Value:yyyy-MM-dd HH:mm:ss}', '{listViewSellList.Items[i].SubItems[0].Text}', '{listViewSellList.Items[i].SubItems[1].Text}', '{listViewSellList.Items[i].SubItems[2].Text}', '{tabControl1.SelectedIndex}', '주문', '{User.GetInstance().ID}');");
+                DBManager.GetInstance().WriteQuery(
+                    "INSERT INTO `s5469394`.`SalesLog` (`주문번호`, `날짜`, `상품명`, `상품개수`, `상품가격합`, `테이블번호`, `상태`, `판매자`) " +
+                    $"VALUES ({SellCount}, '{dateTimePeeker.Value:yyyy-MM-dd HH:mm:ss}', '{listViewSellList.Items[i].SubItems[0].Text}', '{listViewSellList.Items[i].SubItems[1].Text}', '{listViewSellList.Items[i].SubItems[2].Text}', '{tabControl1.SelectedIndex}', '주문내역', '{User.GetInstance().ID}');");
             }
             MessageBox.Show("주문이 완료되었습니다.");
         }
@@ -140,7 +144,7 @@ namespace DBP_PROJECT
             {
                 DBManager.GetInstance().WriteQuery(
                     "UPDATE `s5469394`.`Sales` " +
-                    "SET `상태` = '주문완료' " +
+                    $"SET `날짜` = '{DateTime.Now:yyyy-MM-dd-HH-mm-ss}', `상태` = '주문완료' " +
                     $"WHERE(`상태` = '주문' AND `테이블번호` = '{table}');");
 
                 DBManager.GetInstance().WriteQuery(
@@ -228,6 +232,21 @@ namespace DBP_PROJECT
                             $"WHERE (`테이블번호` = '{textBoxTableNumber.Text}' AND `상태` = '결제완료');");
                     dataGridViewResult.DataSource = dt;
                 }
+                else if(checkBoxChangeGoods.Checked == true)
+                {
+                    DataTable dt1 = DBManager.GetInstance().GetGrid(
+                        "SELECT * " +
+                        "FROM s5469394.SalesLog " +
+                        $"WHERE (테이블번호 = {textBoxTableNumber.Text} AND 상태 = '주문내역')");
+
+                    DataTable dt2 = DBManager.GetInstance().GetGrid(
+                        "SELECT * " +
+                        "FROM s5469394.SalesLog " +
+                        $"WHERE (테이블번호 = {textBoxTableNumber.Text} AND 상태 = '취소 후 주문내역')");
+
+                    dt1.Merge(dt2);
+                    dataGridViewResult.DataSource = dt1;
+                }
                 else
                 {
                     MessageBox.Show("옵션을 체크해주세요");
@@ -252,25 +271,49 @@ namespace DBP_PROJECT
         {
             int table = tabControl1.SelectedIndex;
             int check = Convert.ToInt32(listViewSellList.SelectedItems[0].SubItems[1].Text) - Convert.ToInt32(textBoxCancelValue.Text);
-            int price = check * Convert.ToInt32(Goods.GetInstance().price);
+            int price = Convert.ToInt32(listViewSellList.SelectedItems[0].SubItems[2].Text) / Convert.ToInt32(listViewSellList.SelectedItems[0].SubItems[1].Text);
             SingleGoods(textBoxCancelName.Text);
             DBManager.GetInstance().WriteQuery(
                 "INSERT INTO `s5469394`.`Sales` (`날짜`, `상품명`, `상품개수`, `상품가격합`, `테이블번호`, `상태`, 판매자) " +
-                $"VALUES ('{DateTime.Now:yyyy-MM-dd-HH-mm-ss}', '{textBoxCancelName.Text}', '{textBoxCancelValue.Text}', '{Convert.ToInt32(Goods.GetInstance().price) * Convert.ToInt32(textBoxCancelValue.Text)}', '{table}', '취소완료', '{User.GetInstance().ID}');");
-
-            if(check == 0)
+                $"VALUES ('{DateTime.Now:yyyy-MM-dd-HH-mm-ss}', '{textBoxCancelName.Text}', '{textBoxCancelValue.Text}', '{Convert.ToInt32(textBoxCancelValue.Text) * price}', '{table}', '취소완료', '{User.GetInstance().ID}');");
+            listViewSellList.BeginUpdate();
+            if (check == 0)
             {
                 DBManager.GetInstance().WriteQuery(
                     "DELETE FROM `s5469394`.`Sales` " +
-                    $"WHERE (`상품명` = '{textBoxCancelName.Text}') AND `상태` = '주문';");
+                    $"WHERE (`상품명` = '{textBoxCancelName.Text}') AND `상태` = '주문'; AND `테이블번호` = '{table}'");
+                listViewSellList.SelectedItems[0].Remove();
             }
             else
             {
                 DBManager.GetInstance().WriteQuery(
                     "UPDATE `s5469394`.`Sales` " +
-                    $"SET `상품개수` = '{check}', `상품가격합` = '{price}' " +
-                    $"WHERE(`상태` = '주문' AND `테이블번호` = '{table}');");
+                    $"SET `상품개수` = '{check}', `상품가격합` = '{price * check}' " +
+                    $"WHERE(`상태` = '주문' AND `테이블번호` = '{table}' AND `상품명` = '{textBoxCancelName.Text}');");
+                listViewSellList.SelectedItems[0].SubItems[1].Text = check.ToString();
+                listViewSellList.SelectedItems[0].SubItems[2].Text = (price * check).ToString();
             }
+            Payment();
+            listViewSellList.EndUpdate();
+            for (int i = 0; i < listViewSellList.Items.Count; i++)
+            {
+                DBManager.GetInstance().WriteQuery(
+                    "INSERT INTO `s5469394`.`SalesLog` (`주문번호`, `날짜`, `상품명`, `상품개수`, `상품가격합`, `테이블번호`, `상태`, `판매자`) " +
+                    $"VALUES ({SellCount}, '{dateTimePeeker.Value:yyyy-MM-dd HH:mm:ss}', '{listViewSellList.Items[i].SubItems[0].Text}', '{listViewSellList.Items[i].SubItems[1].Text}', '{listViewSellList.Items[i].SubItems[2].Text}', '{tabControl1.SelectedIndex}', '취소 후 주문내역', '{User.GetInstance().ID}');");
+            }
+            MessageBox.Show("취소가 완료되었습니다.");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Menu menu = new();
+            menu.ShowDialog();
+        }
+
+        private void buttonPwChange_Click(object sender, EventArgs e)
+        {
+            PwChange PwForm = new();
+            PwForm.ShowDialog();
         }
     }
 }

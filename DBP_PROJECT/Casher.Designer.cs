@@ -33,6 +33,7 @@ namespace DBP_PROJECT
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.labelUserName = new System.Windows.Forms.Label();
             this.groupBoxUser = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonCoke = new System.Windows.Forms.Button();
             this.buttonBeefMeat = new System.Windows.Forms.Button();
             this.buttondumpling = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@ namespace DBP_PROJECT
             this.textBoxTableNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxChangeGoods = new System.Windows.Forms.CheckBox();
             this.checkBoxOrder = new System.Windows.Forms.CheckBox();
             this.checkBoxPayment = new System.Windows.Forms.CheckBox();
             this.buttonSearch = new System.Windows.Forms.Button();
@@ -69,6 +71,7 @@ namespace DBP_PROJECT
             this.label3 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonPwChange = new System.Windows.Forms.Button();
             this.groupBoxUserLogout.SuspendLayout();
             this.groupBoxUser.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -109,6 +112,7 @@ namespace DBP_PROJECT
             // 
             // groupBoxUser
             // 
+            this.groupBoxUser.Controls.Add(this.button1);
             this.groupBoxUser.Controls.Add(this.buttonCoke);
             this.groupBoxUser.Controls.Add(this.buttonBeefMeat);
             this.groupBoxUser.Controls.Add(this.buttondumpling);
@@ -122,6 +126,16 @@ namespace DBP_PROJECT
             this.groupBoxUser.TabIndex = 16;
             this.groupBoxUser.TabStop = false;
             this.groupBoxUser.Text = "판매";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(609, 169);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "메뉴변경";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonCoke
             // 
@@ -370,6 +384,7 @@ namespace DBP_PROJECT
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxChangeGoods);
             this.groupBox1.Controls.Add(this.checkBoxOrder);
             this.groupBox1.Controls.Add(this.checkBoxPayment);
             this.groupBox1.Controls.Add(this.buttonSearch);
@@ -381,6 +396,16 @@ namespace DBP_PROJECT
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "판매조회";
+            // 
+            // checkBoxChangeGoods
+            // 
+            this.checkBoxChangeGoods.AutoSize = true;
+            this.checkBoxChangeGoods.Location = new System.Drawing.Point(232, 70);
+            this.checkBoxChangeGoods.Name = "checkBoxChangeGoods";
+            this.checkBoxChangeGoods.Size = new System.Drawing.Size(74, 19);
+            this.checkBoxChangeGoods.TabIndex = 31;
+            this.checkBoxChangeGoods.Text = "취소내역";
+            this.checkBoxChangeGoods.UseVisualStyleBackColor = true;
             // 
             // checkBoxOrder
             // 
@@ -468,11 +493,22 @@ namespace DBP_PROJECT
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "취소칸";
             // 
+            // buttonPwChange
+            // 
+            this.buttonPwChange.Location = new System.Drawing.Point(12, 12);
+            this.buttonPwChange.Name = "buttonPwChange";
+            this.buttonPwChange.Size = new System.Drawing.Size(105, 23);
+            this.buttonPwChange.TabIndex = 32;
+            this.buttonPwChange.Text = "비밀번호 변경";
+            this.buttonPwChange.UseVisualStyleBackColor = true;
+            this.buttonPwChange.Click += new System.EventHandler(this.buttonPwChange_Click);
+            // 
             // Casher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1526, 636);
+            this.Controls.Add(this.buttonPwChange);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridViewResult);
@@ -544,5 +580,8 @@ namespace DBP_PROJECT
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBoxChangeGoods;
+        private System.Windows.Forms.Button buttonPwChange;
     }
 }

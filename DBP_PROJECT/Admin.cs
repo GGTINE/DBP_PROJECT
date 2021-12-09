@@ -82,6 +82,11 @@ namespace DBP_PROJECT
                         "SELECT * FROM s5469394.Log;");
                     dataGridInfo.DataSource = dt;
                     break;
+                case 4:
+                    dt = DBManager.GetInstance().GetGrid(
+                        "SELECT * FROM s5469394.GoodsLog;");
+                    dataGridInfo.DataSource = dt;
+                    break;
             }
         }
 
@@ -98,6 +103,12 @@ namespace DBP_PROJECT
                 WriteLog();
                 MessageBox.Show("로그아웃 합니다.");
             }
+        }
+
+        private void buttonPwChange_Click(object sender, EventArgs e)
+        {
+            PwChange PwForm = new();
+            PwForm.ShowDialog();
         }
     }
 }

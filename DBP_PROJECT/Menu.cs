@@ -27,12 +27,16 @@ namespace DBP_PROJECT
                 listBoxMenu.Items.Add(list[i]);
             }
         }
-
+        private string OldName;
+        private string OldPrice;
         private void listBoxMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
             var list = DBManager.GetInstance().GetSelect($"SELECT * From s5469394.Goods WHERE(상품명 = '{listBoxMenu.SelectedItem}')");
             textBoxName.Text = list["상품명"].ToString();
             textBoxPrice.Text = list["가격"].ToString();
+
+            OldName = list["상품명"].ToString();
+            OldPrice = list["가격"].ToString();
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -60,10 +64,15 @@ namespace DBP_PROJECT
             }
             else
             {
+                DBManager.GetInstance().WriteQuery(
+                    "INSERT INTO `s5469394`.`GoodsLog` " +
+                    $"VALUES('{DateTime.Now:yyyy-MM-dd-HH-mm-ss}', '{User.GetInstance().ID}', '{OldName}', '{OldPrice}', '{textBoxName.Text}', '{textBoxPrice.Text}');");
+                
                 bool change = DBManager.GetInstance().WriteQuery(
                     "UPDATE `s5469394`.`Goods`" +
                     $"SET `상품명` = '{textBoxName.Text}', `가격` = '{textBoxPrice.Text}'" +
                     $"WHERE(`상품명` = '{listBoxMenu.SelectedItem}');");
+
                 if(change)
                 {
                     MessageBox.Show("변경되었습니다.");
